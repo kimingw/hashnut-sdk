@@ -17,9 +17,9 @@ interface Window {
   [propName: string]: any
   tokenPock_callback: () => void
 }
-declare module 'tronweb';
-declare module 'file-saver';
-
+declare module 'tronweb'
+declare module 'file-saver'
+declare module 'qrcode'
 
 declare module 'react-syntax-highlighter/dist/esm/styles/prism'
 declare module 'react-syntax-highlighter'

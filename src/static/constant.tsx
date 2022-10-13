@@ -1,5 +1,5 @@
-import { ethUsdc, ethUsdt, bscBusd, trxUsdt, imTokenIcon, tokenPocketIcon, metaMaskIcon } from './svg'
-
+import { ethUsdc, ethUsdt, bscBusd, trxUsdt, imTokenIcon, tokenPocketIcon, metaMaskIcon, ethIcon, bscIcon, tronIcon } from './svg'
+import { getChainName } from '../utils'
 
 const LOGINAPP = (url: string) => {
     return [
@@ -9,11 +9,14 @@ const LOGINAPP = (url: string) => {
     ]
 }
 
-// const LOGINAPP: any = [
-//     { name: 'imToken', src: 'imtokenv2://navigate/DappView', icon: imTokenIcon },
-//     { name: 'TokenPocket', src: 'tpdapp://open', icon: tokenPocketIcon },
-//     { name: 'MetaMask', src: 'https://metamask.app.link/dapp/', icon: metaMaskIcon },
-// ]
+const LOGINDAPP = (coins: any) => {
+    const { eth, bsc, tron } = coins
+    return [
+        { name: getChainName(eth), coinIcon: ethIcon, type: 'metamask', chain: 'ETH', chainId: eth },
+        { name: getChainName(bsc), coinIcon: bscIcon, type: 'metamask', chain: 'BSC', chainId: bsc },
+        { name: getChainName(tron), coinIcon: tronIcon, type: 'tronlink', chain: 'TRX', chainId: tron },
+    ]
+}
 
 const PAYUI: any = {
     erc20Address: {
@@ -49,4 +52,4 @@ const PAYUI: any = {
     },
 }
 
-export { PAYUI, LOGINAPP }
+export { PAYUI, LOGINAPP, LOGINDAPP }

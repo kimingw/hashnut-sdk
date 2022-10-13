@@ -1,6 +1,6 @@
 import { createPortal } from 'react-dom'
 import 'tronweb'
-import { ethers } from "ethers";
+// import { ethers } from "ethers";
 import { Mask, Login, Pay } from './components'
 import { projectName, urlPay } from './config'
 import { createXHR, getUUID, getAddress } from './utils'
@@ -10,6 +10,8 @@ const hashnutId = document.getElementById('hashnut')
 
 function App() {
   const [mask, setMask]: any = useState(null)
+  const [hideMask, setHideMask] = useState(false)
+
   const [payInfo, setPayInfo] = useState({})
   const [loginInfo, setLoginInfo] = useState({})
 
@@ -28,15 +30,15 @@ function App() {
 
   window[projectName] = {
     init: (configuration: any) => {
-      const { lang, erc20Address, bscAddress, trc20Address } = configuration
+      const { lang, erc20Address, bep20Address, trc20Address } = configuration
       setLang(lang)
-      setAddress({ erc20Address, bscAddress, trc20Address })
+      setAddress({ erc20Address, bep20Address, trc20Address })
       // 查看可用的coins
       if (erc20Address.length > 0) {
         coins.push({ chainCode: 'erc20', coinCode: 'usdt' })
         coins.push({ chainCode: 'erc20', coinCode: 'usdc' })
       }
-      if (bscAddress.length > 0) {
+      if (bep20Address.length > 0) {
         coins.push({ chainCode: 'bsc', coinCode: 'busd' })
       }
       if (trc20Address.length > 0) {
@@ -105,7 +107,7 @@ function App() {
       })
     },
     login: (loginRes: any, callback: any) => {
-      setLoginInfo(loginRes, callback)
+      setLoginInfo({ loginRes, callback })
       setMask('login')
     },
     pay: (amount: any, currency: any) => {
@@ -119,15 +121,15 @@ function App() {
 
   if (mask) {
     const _renderMask = (DOM: React.ReactElement) => {
-      return <Mask paramObject={{ mask, setMask }}>{DOM}</Mask>
+      return <Mask paramObject={{ mask, setMask, hideMask, setHideMask }}>{DOM}</Mask>
     }
     let portal
     switch (mask) {
       case 'login':
-        portal = _renderMask(<Login configure={{ loginInfo }} />)
+        portal = _renderMask(<Login configure={{ loginInfo }} emit={{ setHideMask }} />)
         break;
       case 'pay':
-        portal = _renderMask(<Pay configure={{ address, lang, payInfo }} />)
+        portal = _renderMask(<Pay configure={{ address, lang, payInfo }} emit={{ setHideMask }} />)
         break;
     }
     return (createPortal(portal, hashnutId ? hashnutId : document.body))

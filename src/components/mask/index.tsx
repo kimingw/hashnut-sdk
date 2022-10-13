@@ -7,14 +7,21 @@ interface prop {
 
 const Mask = (prop: prop) => {
     const { children, paramObject } = prop
-    const { mask, setMask } = paramObject
+    const { mask, setMask, hideMask, setHideMask } = paramObject
     const [dom, setDom] = useState(false)
     const [show, setShow] = useState(false)
+    useEffect(() => {
+        if (hideMask) {
+            setShow(false)
+        }
+    }, [hideMask])
+
     useEffect(() => {
         if (typeof (mask) === 'string') {
             setDom(true)
             setShow(true)
         } else {
+            console.log('mask')
             setShow(false)
         }
     }, [mask])
@@ -25,6 +32,7 @@ const Mask = (prop: prop) => {
         if (e.animationName.indexOf('hide') !== -1) {
             setDom(false)
             setMask(null)
+            setHideMask(false)
         }
     }
     return (

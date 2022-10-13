@@ -33,7 +33,7 @@ const getAddress = (chainCode: string, addres: any) => {
         case 'erc20':
             return addres.erc20Address
         case 'bep20':
-            return addres.bscAddress
+            return addres.bep20Address
         case 'trc20':
             return addres.trc20Address
     }
