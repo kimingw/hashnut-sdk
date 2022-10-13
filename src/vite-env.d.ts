@@ -14,6 +14,7 @@ interface Window {
   ReactNativeWebView: any
   ReactNativeCallBack: any
   isTokenPock: boolean
+  [propName: string]: any
   tokenPock_callback: () => void
 }
 declare module 'tronweb';

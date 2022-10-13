@@ -1,0 +1,675 @@
+.hashNutAmountBox,
+.hashNutBox,
+.hashNutClose,
+.hashNutHeader,
+.hashNutSelectBox,
+.hashNutSelectItem {
+  display: -webkit-box;
+  display: -ms-flexbox
+}
+
+.hashNutBox {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, .3);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-animation: .3s linear forwards hashNutShow;
+  animation: .3s linear forwards hashNutShow
+}
+
+.hashNutBoxHide {
+  -webkit-animation: .3s linear forwards hashNutHide;
+  animation: .3s linear forwards hashNutHide
+}
+
+@-webkit-keyframes hashNutShow {
+  from {
+    background-color: rgba(0, 0, 0, 0)
+  }
+
+  to {
+    background-color: rgba(0, 0, 0, .3)
+  }
+}
+
+@keyframes hashNutShow {
+  from {
+    background-color: rgba(0, 0, 0, 0)
+  }
+
+  to {
+    background-color: rgba(0, 0, 0, .3)
+  }
+}
+
+@-webkit-keyframes hashNutHide {
+  from {
+    background-color: rgba(0, 0, 0, .3)
+  }
+
+  to {
+    background-color: rgba(0, 0, 0, 0)
+  }
+}
+
+@keyframes hashNutHide {
+  from {
+    background-color: rgba(0, 0, 0, .3)
+  }
+
+  to {
+    background-color: rgba(0, 0, 0, 0)
+  }
+}
+
+.hashNutContent {
+  font-size: 17px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 500px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  -webkit-transition: .35s;
+  -o-transition: .35s;
+  transition: .35s;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-transform-origin: center;
+  -ms-transform-origin: center;
+  transform-origin: center;
+  -webkit-animation: .3s linear forwards hashNutContentShow;
+  animation: .3s linear forwards hashNutContentShow
+}
+
+.hashNutContentHide {
+  -webkit-animation: .3s linear forwards hashNutContentHide;
+  animation: .3s linear forwards hashNutContentHide
+}
+
+@-webkit-keyframes hashNutContentShow {
+  from {
+    -webkit-transform: scale(0);
+    transform: scale(0)
+  }
+
+  to {
+    -webkit-transform: scale(1);
+    transform: scale(1)
+  }
+}
+
+@keyframes hashNutContentShow {
+  from {
+    -webkit-transform: scale(0);
+    transform: scale(0)
+  }
+
+  to {
+    -webkit-transform: scale(1);
+    transform: scale(1)
+  }
+}
+
+@-webkit-keyframes hashNutContentHide {
+  from {
+    -webkit-transform: scale(1);
+    transform: scale(1)
+  }
+
+  to {
+    -webkit-transform: scale(0);
+    transform: scale(0)
+  }
+}
+
+@keyframes hashNutContentHide {
+  from {
+    -webkit-transform: scale(1);
+    transform: scale(1)
+  }
+
+  to {
+    -webkit-transform: scale(0);
+    transform: scale(0)
+  }
+}
+
+.hashNutHeader {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center
+}
+
+.hashNutTitle {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  font-weight: 700;
+  font-size: 20px
+}
+
+.hashNutClose {
+  width: 36px;
+  height: 36px;
+  margin-left: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  cursor: pointer
+}
+
+.hashNutClose:hover {
+  opacity: .5
+}
+
+.hashNutLine {
+  margin-top: 20px
+}
+
+.hashNutAmountBox,
+.hashNutSelectBox {
+  margin-top: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex
+}
+
+.hashNutSelectItem {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 44px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border: 1px solid #e1e5f2;
+  color: #616b84;
+  margin-right: 10px;
+  border-radius: 5px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none
+}
+
+.hashNutSelectItem svg {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px
+}
+
+.hashNutSelectItemNull {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin-right: 0
+}
+
+.hashNutSelectItemActive {
+  border: 1px solid #08b89d;
+  color: #08b89d;
+  font-weight: 700;
+  font-size: 17px
+}
+
+.hashNutAmountBoxItemLoadShow span:last-child,
+.hashNutOrderBtnLoad span:last-child,
+.hashNutSelectItem:last-child {
+  margin-right: 0
+}
+
+.hashNutAmountBox {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center
+}
+
+.hashNutAmountBoxItem {
+  font-size: 12px;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  text-align: center;
+  padding: 5px 0;
+  border: 1px solid #f1f1f1;
+  border-radius: 10px
+}
+
+.hashNutAmountBoxItemError {
+  border: 1px solid #f63d3d;
+  color: #f63d3d
+}
+
+.hashNutAmountBoxItemPointer {
+  cursor: pointer;
+  color: #08b89d;
+  border: 1px solid #08b89d
+}
+
+.hashNutAmountBoxItem span {
+  margin-right: 3px;
+  font-size: 20px;
+  font-weight: 700
+}
+
+.hashNutAmountBoxItemLoadShow span,
+.hashNutOrderBtnLoad span {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  border-radius: 50%;
+  -webkit-animation: 1.04s infinite hashNutLoad
+}
+
+.hashNutAmountBoxItemError span {
+  font-weight: 400
+}
+
+.hashNutAmountBoxFlag {
+  width: 15px;
+  height: 15px;
+  margin: 0 20px
+}
+
+.hashNutOrderBtn,
+.hashNutOrderBtnLoad {
+  width: 100%;
+  background-color: #08b89d;
+  height: 40px;
+  border-radius: 5px;
+  color: #fff;
+  margin-top: 30px
+}
+
+.hashNutAmountBoxItemLoadShow {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center
+}
+
+.hashNutCurrencyDesc,
+.hashNutOrderError {
+  font-size: 12px;
+  margin-top: 10px
+}
+
+.hashNutAmountBoxItemLoadHide,
+.hashNutOrderBtnHide {
+  display: none
+}
+
+.hashNutAmountBoxItemLoadShow span {
+  background: #08b89d
+}
+
+.hashNutOrderBtnLoad span {
+  background: #fffF
+}
+
+@-webkit-keyframes hashNutLoad {
+  0% {
+    opacity: 1
+  }
+
+  100% {
+    opacity: 0
+  }
+}
+
+.hashNutAmountBoxItemLoadShow span:first-child,
+.hashNutOrderBtnLoad span:first-child {
+  -webkit-animation-delay: .13s
+}
+
+.hashNutAmountBoxItemLoadShow span:nth-child(2),
+.hashNutOrderBtnLoad span:nth-child(2) {
+  -webkit-animation-delay: .26s
+}
+
+.hashNutAmountBoxItemLoadShow span:nth-child(3),
+.hashNutOrderBtnLoad span:nth-child(3) {
+  -webkit-animation-delay: .39s
+}
+
+.hashNutAmountBoxItemLoadShow span:nth-child(4),
+.hashNutOrderBtnLoad span:nth-child(4) {
+  -webkit-animation-delay: .52s
+}
+
+.hashNutAmountBoxItemLoadShow span:nth-child(5),
+.hashNutOrderBtnLoad span:nth-child(5) {
+  -webkit-animation-delay: .65s
+}
+
+.hashNutOrderBtn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none
+}
+
+.hashNutOrderBtnLoad {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center
+}
+
+.hashNutOrderBtn:hover {
+  opacity: .8
+}
+
+.hashNutCurrencyDesc {
+  color: #616b84
+}
+
+.hashNutOrderError {
+  color: #f63d3d;
+  text-align: right
+}
+
+.hashNutPayButton,
+.hashNutLoginButton {
+  margin: 0;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #fff;
+  border: 1px solid transparent;
+  background-color: #08b89d;
+  outline: 0;
+  -webkit-transform-origin: center;
+      -ms-transform-origin: center;
+          transform-origin: center;
+  cursor: pointer
+}
+
+.hashNutPayButton:hover,
+.hashNutLoginButton:hover {
+  opacity: .6
+}
+
+.hashNutPayButton:active,
+.hashNutLoginButton:active {
+  -webkit-transform: scale(.95);
+      -ms-transform: scale(.95);
+          transform: scale(.95)
+}
+
+.hashNutMainLoadBox {
+  height: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.hashNutAccountList {
+  padding: 0 10px;
+  margin-top: 20px;
+}
+
+.hashNutAccountItem {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 60px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.hashNutAccountItemLine {
+  border-bottom: 1px solid rgb(225, 229, 242);
+}
+
+.hashNutAccountItem:hover {
+  opacity: 0.6;
+}
+
+/* .hashNutAccountItem:last-child {
+  border-bottom: 0px solid rgb(225, 229, 242);
+} */
+
+.hashNutAccountItemIcon {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.hashNutAccountItem:nth-child(1) .hashNutAccountItemIcon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border: 1px solid rgb(62, 142, 191);
+}
+
+.hashNutAccountItem:nth-child(5) .hashNutAccountItemIcon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border: 1px solid #ff060a;
+  color: #ff060a;
+}
+
+.hashNutAccountItemTitle {
+  color: #19233c;
+  margin-left: 10px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  width: 0;
+  font-size: 18px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  text-decoration: none;
+}
+
+.hashNutAccountItemRight {
+  font-size: 12px;
+  margin-right: 5px;
+  font-weight: 700;
+  color: #ff4d4f;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.hashNutHide {
+  display: none;
+}
+
+.hashNutUsePhoneBtnBox {
+  padding: 0 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  -webkit-box-pack: end;
+
+      -ms-flex-pack: end;
+
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+
+  margin-top: 10px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.hashNutUsePhoneBtn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.hashNutUsePhoneBtnName {}
+
+.hashNutUsePhoneBtnIcon {
+  margin-right: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.hashNutQrBox {
+  /* height: 100px; */
+}
+
+.hashNutQrBoxTitle {
+  color: #8b93a7;
+  margin: 10px auto;
+}
+
+.hashNutQrBoxImage {
+  /* width: 300px; */
+  width: 100%;
+  height: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+
+}
+
+.hashNutQrBoxImageCanvas {
+  height: 300px;
+  width: 300px;
+  background-color: #f1f1f1;
+}
+
+.hashNutQrBoxDesc {
+  color: #8b93a7;
+  margin: 20px auto 10px;
+}
+
+.hashNutAppList {
+  padding: 0 10px;
+  margin-top: 20px;
+}
+.hashNutAppRightIcon{
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.hashNutAppRightIconPoint{
+  margin-left: 10px;
+  color: #19233c;
+}
+
+@media (max-width:800px) {
+  .hashNutContent {
+    width: 95%;
+    padding: 20px 15px
+  }
+
+  .hashNutAmountBoxFlag {
+    margin: 0 10px
+  }
+}

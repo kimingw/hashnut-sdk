@@ -1,4 +1,5 @@
+import Mask from './mask'
 import Login from './login'
 import Pay from './pay'
 
-export { Login, Pay }
+export { Mask, Login, Pay }
