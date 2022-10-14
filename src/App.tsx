@@ -4,6 +4,7 @@ import 'tronweb'
 import { Mask, Login, Pay } from './components'
 import { projectName, urlPay } from './config'
 import { createXHR, getUUID, getAddress } from './utils'
+import check from './check'
 import './hashnut.css'
 
 const hashnutId = document.getElementById('hashnut')
@@ -11,6 +12,8 @@ const hashnutId = document.getElementById('hashnut')
 function App() {
   const [mask, setMask]: any = useState(null)
   const [hideMask, setHideMask] = useState(false)
+
+  const [init, setInit] = useState(false)
 
   const [payInfo, setPayInfo] = useState({})
   const [loginInfo, setLoginInfo] = useState({})
@@ -30,8 +33,10 @@ function App() {
 
   window[projectName] = {
     init: (configuration: any) => {
+      check.init(configuration)
+
       const { lang, erc20Address, bep20Address, trc20Address } = configuration
-      setLang(lang)
+      lang && setLang(lang)
       setAddress({ erc20Address, bep20Address, trc20Address })
       // 查看可用的coins
       if (erc20Address.length > 0) {
@@ -44,6 +49,7 @@ function App() {
       if (trc20Address.length > 0) {
         coins.push({ chainCode: 'trc20', coinCode: 'usdt' })
       }
+      setInit(true)
     },
     changeLang: (lang: string) => {
       if (lang !== 'en' && lang !== 'zh' && lang !== 'zh-hk') return

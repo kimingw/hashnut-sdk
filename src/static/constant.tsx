@@ -11,10 +11,20 @@ const LOGINAPP = (url: string) => {
 
 const LOGINDAPP = (coins: any) => {
     const { eth, bsc, tron } = coins
+    const judgeAppNeed = (name: string) => {
+        switch (name) {
+            case 'eth':
+                return !window.ethereum
+            case 'bsc':
+                return (!window.ethereum || !window.imToken)
+            case 'tron':
+                return !window.tronLink
+        }
+    }
     return [
-        { name: getChainName(eth), coinIcon: ethIcon, type: 'metamask', chain: 'ETH', chainId: eth },
-        { name: getChainName(bsc), coinIcon: bscIcon, type: 'metamask', chain: 'BSC', chainId: bsc },
-        { name: getChainName(tron), coinIcon: tronIcon, type: 'tronlink', chain: 'TRX', chainId: tron },
+        { name: getChainName(eth), coinIcon: ethIcon, type: 'metamask', chain: 'ETH', chainId: eth, appNeed: judgeAppNeed('eth') },
+        { name: getChainName(bsc), coinIcon: bscIcon, type: 'metamask', chain: 'BSC', chainId: bsc, appNeed: judgeAppNeed('bsc') },
+        { name: getChainName(tron), coinIcon: tronIcon, type: 'tronlink', chain: 'TRX', chainId: tron, appNeed: judgeAppNeed('tron') },
     ]
 }
 

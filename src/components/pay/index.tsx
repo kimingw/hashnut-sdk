@@ -3,10 +3,11 @@ import { closeIcon, doubleArrowRight } from '../../static/svg'
 import { formatNumber } from '../../utils'
 import { projectName } from '../../config'
 
-function Pay({ configure }: any) {
+function Pay({ configure, emit }: any) {
     const { address, lang, payInfo } = configure
     const [renderArr, setRenderArr] = useState([])
     const { amount, currency } = payInfo
+    const { setHideMask } = emit
 
     const [active, setActive] = useState(0)
     const [activeCoin, setActiveCoin] = useState(0)
@@ -71,7 +72,7 @@ function Pay({ configure }: any) {
         <div className="hashNutContent">
             <div className="hashNutHeader">
                 <div className="hashNutTitle">Checkout</div>
-                <div className="hashNutClose">
+                <div className="hashNutClose" onClick={() => { setHideMask(true) }}>
                     {closeIcon}
                 </div>
             </div>

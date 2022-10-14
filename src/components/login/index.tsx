@@ -237,17 +237,22 @@ function Login({ configure, emit }: any) {
                         </div> :
                         <div className="hashNutAccountList">
                             {LOGINDAPP({ eth, bsc, tron }).map((item: any, index: number) => {
-                                return (
-                                    <React.Fragment key={index}>
-                                        <div onClick={() => { bandleLogin(item.type, item.chain, item.chainId) }} className="hashNutAccountItem">
-                                            <div className="hashNutAccountItemIcon">
-                                                {item.coinIcon}
+                                if (!(checkPhone() && item.appNeed)) {
+                                    return (
+                                        <React.Fragment key={index}>
+                                            <div onClick={() => { bandleLogin(item.type, item.chain, item.chainId) }} className="hashNutAccountItem">
+                                                <div className="hashNutAccountItemIcon">
+                                                    {item.coinIcon}
+                                                </div>
+                                                <div className="hashNutAccountItemTitle">{item.type === 'metamask' && !checkPhone() && !window.ethereum ? 'Install MetaMask' :
+                                                    item.type === 'tronlink' && !checkPhone() && !window.tronLink ? 'Install MetaMask' :
+                                                        item.name}
+                                                </div>
                                             </div>
-                                            <div className="hashNutAccountItemTitle">{item.name}</div>
-                                        </div>
-                                        {LOGINDAPP({ eth, bsc, tron }).length - 1 > index && <div className="hashNutAccountItemLine"></div>}
-                                    </React.Fragment>
-                                )
+                                            {LOGINDAPP({ eth, bsc, tron }).length - 1 > index && <div className="hashNutAccountItemLine"></div>}
+                                        </React.Fragment>
+                                    )
+                                }
                             })}
                         </div>}
                 </>

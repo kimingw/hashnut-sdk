@@ -1,7 +1,7 @@
-import { projectName, urlPrefix } from './config'
+import { urlPrefix } from './config'
 
 const getUUID = (domain: string) => {
-    var bin2hex = function (s: string) {
+    const bin2hex = function (s: string) {
         var i, l, o = "", n
         s += ""
         for (i = 0, l = s.length; i < l; i++) {
@@ -10,9 +10,9 @@ const getUUID = (domain: string) => {
         }
         return o
     }
-    var canvas = document.createElement("canvas");
-    var ctx = canvas.getContext("2d");
-    var txt = domain;
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    const txt = domain;
     if (ctx === null) return ''
     ctx.textBaseline = "top";
     ctx.font = "14px 'Arial'";
@@ -22,9 +22,9 @@ const getUUID = (domain: string) => {
     ctx.fillText(txt, 2, 15);
     ctx.fillStyle = "rgba(102, 204, 0, 0.7)";
     ctx.fillText(txt, 4, 17);
-    var b64 = canvas.toDataURL().replace("data:image/png;base64,", "");
-    var bin = atob(b64);
-    var crc = bin2hex(bin.slice(-28, -12));
+    const b64 = canvas.toDataURL().replace("data:image/png;base64,", "");
+    const bin = atob(b64);
+    const crc = bin2hex(bin.slice(-28, -12));
     return crc;
 }
 

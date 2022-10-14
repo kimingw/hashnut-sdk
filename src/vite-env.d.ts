@@ -17,6 +17,7 @@ interface Window {
   [propName: string]: any
   tokenPock_callback: () => void
 }
+// interface process
 declare module 'tronweb'
 declare module 'file-saver'
 declare module 'qrcode'
