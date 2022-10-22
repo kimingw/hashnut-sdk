@@ -1,64 +1,56 @@
 import { createPortal } from 'react-dom'
-import 'tronweb'
-// import { ethers } from "ethers";
+// import 'tronweb'
+// import { ethers } from "ethers"
 import { Mask, Login, Pay } from './components'
 import { projectName, urlPay } from './config'
 import { createXHR, getUUID, getAddress } from './utils'
-import check from './check'
-import './hashnut.css'
+import check from './helper/check'
+import { useCoins } from './helper/hook'
 
-const hashnutId = document.getElementById('hashnut')
+const hashnutId = document.getElementById(projectName)
 
-function App() {
-  const [mask, setMask]: any = useState(null)
+
+function App({ lang: _lang, erc20Address, bep20Address, trc20Address }: InitProps) {
+  // 弹窗相关
+  const [mask, setMask] = useState(null)
   const [hideMask, setHideMask] = useState(false)
 
-  const [init, setInit] = useState(false)
-
+  // 传入信息相关
   const [payInfo, setPayInfo] = useState({})
   const [loginInfo, setLoginInfo] = useState({})
 
-
   // 基础信息
-  const [lang, setLang] = useState('en')
+  const [lang, setLang] = useState(_lang ? _lang : 'en')
   const [address, setAddress] = useState({
-    erc20Address: '0xef2651210c1c7f913899fedf79ab2088fc5bf09f',
-    bep20Address: '0xcdb2354508f2fdd0326e284af2d79dcc95df170d',
-    trc20Address: 'TWMX98DHbnNmHX4cNy6YJTRWzyGhRKeZ5a',
+    erc20Address,
+    bep20Address,
+    trc20Address,
   })
+  const coins = useCoins(address)
+
   const currencyRateXhr = useRef(null)
-  const orderXhr = useRef(null)
-  const caches: any = {}
-  const coins: any = []
+  const orderXhr: any = useRef(null)
+  // 利率缓存
+  const caches: any = useRef({})
 
   window[projectName] = {
-    init: (configuration: any) => {
+    init: (configuration: InitProps) => {
       check.init(configuration)
-
       const { lang, erc20Address, bep20Address, trc20Address } = configuration
       lang && setLang(lang)
       setAddress({ erc20Address, bep20Address, trc20Address })
-      // 查看可用的coins
-      if (erc20Address.length > 0) {
-        coins.push({ chainCode: 'erc20', coinCode: 'usdt' })
-        coins.push({ chainCode: 'erc20', coinCode: 'usdc' })
-      }
-      if (bep20Address.length > 0) {
-        coins.push({ chainCode: 'bsc', coinCode: 'busd' })
-      }
-      if (trc20Address.length > 0) {
-        coins.push({ chainCode: 'trc20', coinCode: 'usdt' })
-      }
-      setInit(true)
     },
-    changeLang: (lang: string) => {
-      if (lang !== 'en' && lang !== 'zh' && lang !== 'zh-hk') return
-      setLang(lang)
+    changeLang: (lang: Lang) => {
+      check.changeLang(lang)
+      if (['en', 'zh', 'zh-hk'].includes(lang)) {
+        setLang(lang)
+      }
     },
     getSupportCoins: () => {
       return coins
     },
-    createOrder: (chainCode: string, coinCode: string, amount: number, callback: any) => {
+    createOrder: (chainCode: ChainCode, coinCode: CoinCode, amount: number, callback: any) => {
+      check.createOrder(chainCode, coinCode, amount, callback)
       if (orderXhr.current) {
         orderXhr.current.abort();
         orderXhr.current = null
@@ -85,12 +77,13 @@ function App() {
         orderXhr.current = null
       })
     },
-    getCurrencyRate: (chainCode: string, coin: string, currency: string, callback: any) => {
+    getCurrencyRate: (chainCode: ChainCode, coin: CoinCode, currency: Currency, callback: any) => {
+      check.getCurrencyRate(chainCode, coin, currency)
       if (currencyRateXhr.current) {
         currencyRateXhr.current.abort();
         currencyRateXhr.current = null
       }
-      const res = caches[chainCode + '_' + coin + '_' + currency]
+      const res = caches.current[chainCode + '_' + coin + '_' + currency]
       if (res) {
         const now = new Date().getTime()
         if (now - res.ts < 1000 * 30) {
@@ -104,6 +97,10 @@ function App() {
         chainCode: chainCode
       }
       currencyRateXhr.current = createXHR("/mch/queryFliatExchangeRate", 'GET', data, (res: any) => {
+        caches.current[chainCode + '_' + coin + '_' + currency] = {
+          ts: new Date().getTime(),
+          data: res
+        }
         callback(res)
       }, (res: any) => {
         currencyRateXhr.current = null
@@ -112,15 +109,18 @@ function App() {
         currencyRateXhr.current = null
       })
     },
-    login: (loginRes: any, callback: any) => {
+    login: (loginRes: LoginRes, callback: LoginCallback) => {
+      check.login(loginRes, callback)
       setLoginInfo({ loginRes, callback })
       setMask('login')
     },
-    pay: (amount: any, currency: any) => {
-      setPayInfo({ amount, currency })
+    pay: (amount: number, currency: Currency, callbackURL: string, callback: any) => {
+      check.pay(amount, currency, callbackURL)
+      setPayInfo({ amount, currency, callbackURL, callback })
       setMask('pay')
     },
-    getURL: (order: any, callbackURL: string) => {
+    getURL: (order: Order, callbackURL: string) => {
+      check.getURL(order)
       return urlPay + '?accessSign=' + order.accessSign + '&mchOrderNo=' + order.mchOrderId + '&platformId=' + order.platformId + '&chainCode=' + order.chainCode.toLocaleLowerCase() + (callbackURL ? '&callbackURL=' + encodeURIComponent(callbackURL) : '')
     }
   }
@@ -132,7 +132,7 @@ function App() {
     let portal
     switch (mask) {
       case 'login':
-        portal = _renderMask(<Login configure={{ loginInfo }} emit={{ setHideMask }} />)
+        portal = _renderMask(<Login configure={{ lang, loginInfo }} emit={{ setHideMask }} />)
         break;
       case 'pay':
         portal = _renderMask(<Pay configure={{ address, lang, payInfo }} emit={{ setHideMask }} />)

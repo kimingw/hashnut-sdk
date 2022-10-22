@@ -9,8 +9,8 @@ const LOGINAPP = (url: string) => {
     ]
 }
 
-const LOGINDAPP = (coins: any) => {
-    const { eth, bsc, tron } = coins
+const LOGINDAPP = (coins: LoginNet) => {
+    const puts = []
     const judgeAppNeed = (name: string) => {
         switch (name) {
             case 'eth':
@@ -21,11 +21,16 @@ const LOGINDAPP = (coins: any) => {
                 return !window.tronLink
         }
     }
-    return [
-        { name: getChainName(eth), coinIcon: ethIcon, type: 'metamask', chain: 'ETH', chainId: eth, appNeed: judgeAppNeed('eth') },
-        { name: getChainName(bsc), coinIcon: bscIcon, type: 'metamask', chain: 'BSC', chainId: bsc, appNeed: judgeAppNeed('bsc') },
-        { name: getChainName(tron), coinIcon: tronIcon, type: 'tronlink', chain: 'TRX', chainId: tron, appNeed: judgeAppNeed('tron') },
-    ]
+    const iconMap = {
+        eth: ethIcon,
+        bsc: bscIcon,
+        tron: tronIcon
+    }
+    for (let key in coins) {
+        // @ts-ignore
+        coins[key] && puts.push({ name: getChainName(coins[key]), coinIcon: iconMap[key], type: 'metamask', chain: 'ETH', chainId: coins[key], appNeed: judgeAppNeed(key) })
+    }
+    return puts
 }
 
 const PAYUI: any = {

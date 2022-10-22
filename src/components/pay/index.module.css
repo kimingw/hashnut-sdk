@@ -1,0 +1,247 @@
+.hashNutLine {
+    margin-top: 20px
+}
+
+.hashNutLineTitle {}
+
+.hashNutSelectBox {
+    margin-top: 15px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.hashNutSelectItem {
+    flex: 1;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e1e5f2;
+    color: #616b84;
+    margin-right: 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none
+}
+
+.hashNutSelectItem svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px
+}
+
+.hashNutSelectItem:last-child {
+    margin-right: 0
+}
+
+.hashNutSelectItemActive {
+    border: 1px solid #08b89d;
+    color: #08b89d;
+    font-weight: 700;
+    font-size: 17px
+}
+
+.hashNutSelectItemNull {
+    flex: 1;
+    margin-right: 0
+}
+
+.hashNutAmountBox {
+    align-items: center
+}
+
+.hashNutAmountBoxItem {
+    font-size: 12px;
+    flex: 1;
+    text-align: center;
+    padding: 5px 0;
+    border: 1px solid #f1f1f1;
+    border-radius: 10px
+}
+
+.hashNutAmountBoxItem span {
+    margin-right: 3px;
+    font-size: 20px;
+    font-weight: 700
+}
+
+.hashNutAmountBoxFlag {
+    width: 15px;
+    height: 15px;
+    margin: 0 20px
+}
+
+.hashNutAmountBoxItemPointer {
+    cursor: pointer;
+    color: #08b89d;
+    border: 1px solid #08b89d
+}
+
+.hashNutCurrencyDesc {
+    font-size: 12px;
+    color: #616b84;
+    margin-top: 10px;
+}
+
+.hashNutOrderBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+
+    width: 100%;
+    background-color: #08b89d;
+    height: 40px;
+    border-radius: 5px;
+    color: #fff;
+    margin-top: 30px;
+
+}
+
+.hashNutOrderBtn:hover {
+    opacity: .8;
+}
+
+.hashNutOrderError {
+    font-size: 12px;
+    margin-top: 10px;
+    color: #f63d3d;
+    text-align: right
+}
+
+/* Common */
+.hashNutAmountBox,
+.hashNutBox,
+.hashNutClose,
+.hashNutHeader,
+.hashNutSelectBox,
+.hashNutSelectItem {
+    display: flex;
+}
+
+.hashNutContent {
+    font-size: 17px;
+    box-sizing: border-box;
+    width: 500px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    transition: .35s;
+    transform: scale(0);
+    transform-origin: center;
+    animation: .3s linear forwards hashNutContentShow
+}
+
+@keyframes hashNutContentShow {
+    from {
+        -webkit-transform: scale(0);
+        transform: scale(0)
+    }
+
+    to {
+        -webkit-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+.hashNutHeader {
+    display: flex;
+    align-items: center
+}
+
+.hashNutTitle {
+    flex: 1;
+    width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: 700;
+    font-size: 20px
+}
+
+.hashNutClose {
+    width: 36px;
+    height: 36px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer
+}
+
+.hashNutAmountBoxItemLoadShow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    height: 40px;
+}
+
+.hashNutAmountBoxItemLoadShow span {
+    background: #08b89d
+}
+
+.hashNutAmountBoxItemLoadShow span {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+    border-radius: 50%;
+    animation: 1.04s infinite hashNutLoad;
+}
+
+@keyframes hashNutLoad {
+    0% {
+        opacity: 1
+    }
+
+    100% {
+        opacity: 0
+    }
+}
+
+.hashNutAmountBoxItemLoadShow span:last-child {
+    margin-right: 0
+}
+
+
+.hashNutAmountBoxItemLoadShow span:first-child {
+    animation-delay: .13s
+}
+
+.hashNutAmountBoxItemLoadShow span:nth-child(2) {
+    animation-delay: .26s
+}
+
+.hashNutAmountBoxItemLoadShow span:nth-child(3) {
+    animation-delay: .39s
+}
+
+.hashNutAmountBoxItemLoadShow span:nth-child(4) {
+    animation-delay: .52s
+}
+
+.hashNutAmountBoxItemLoadShow span:nth-child(5) {
+    animation-delay: .65s
+}
+
+.hashNutOrderBtnHide,
+.hashNutAmountBoxItemLoadHide {
+    display: none
+}
+
+
+/* media */
+@media (max-width:800px) {
+    .hashNutContent {
+        width: 95%;
+        padding: 20px 15px
+    }
+
+    .hashNutAmountBoxFlag {
+        margin: 0 10px
+    }
+}

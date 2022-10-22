@@ -45,7 +45,6 @@ const checkCurrency = (currency: string) => {
     return null
 }
 
-
 const checkPhone = () => {
     return navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('iPhone') > -1 || navigator.userAgent.indexOf('iPod') > -1 || navigator.userAgent.indexOf('Symbian') > -1
 }

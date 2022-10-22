@@ -3,14 +3,12 @@ import react from '@vitejs/plugin-react'
 import inject from '@rollup/plugin-inject'
 import { ViteEjsPlugin } from "vite-plugin-ejs"
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
     ViteEjsPlugin((viteConfig) => {
       // @ts-ignore
       const env = loadEnv(viteConfig.mode, process.cwd())
-      // viteConfig is the current viteResolved config.
       return {
         name: env.VITE_PROJECTNAME,
         svgIcon: env.VITE_SVG_ICON

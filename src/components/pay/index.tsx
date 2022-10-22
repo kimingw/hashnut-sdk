@@ -2,12 +2,15 @@ import { PAYUI } from '../../static/constant'
 import { closeIcon, doubleArrowRight } from '../../static/svg'
 import { formatNumber } from '../../utils'
 import { projectName } from '../../config'
+import allTextMap from '../../static/lang'
+import style from './index.module.css'
 
-function Pay({ configure, emit }: any) {
+function Pay({ configure, emit }: PayParams) {
     const { address, lang, payInfo } = configure
     const [renderArr, setRenderArr] = useState([])
-    const { amount, currency } = payInfo
+    const { amount, currency, callback, callbackURL } = payInfo
     const { setHideMask } = emit
+    const textMap = allTextMap[lang]
 
     const [active, setActive] = useState(0)
     const [activeCoin, setActiveCoin] = useState(0)
@@ -17,12 +20,12 @@ function Pay({ configure, emit }: any) {
     useEffect(() => {
         const arr = []
         for (let key in address) {
-            if (address[key].length > 0 && PAYUI[key]) {
+            // @ts-ignore
+            if (address[key] && address[key].length > 0 && PAYUI[key]) {
                 arr.push(PAYUI[key])
             }
         }
         setRenderArr(arr)
-
     }, [])
 
     useEffect(() => {
@@ -63,37 +66,38 @@ function Pay({ configure, emit }: any) {
         const coin = renderArr[active].coins[activeCoin].name
         window[projectName].createOrder(chainCode, coin, amount, (res: any) => {
             if (res.count === 0) {
+                callback && callback(res.data, callbackURL)
                 window.location.href = window[projectName].getURL(res.data, window.location.href)
             }
         })
     }
 
     return (
-        <div className="hashNutContent">
-            <div className="hashNutHeader">
-                <div className="hashNutTitle">Checkout</div>
-                <div className="hashNutClose" onClick={() => { setHideMask(true) }}>
+        <div className={style.hashNutContent}>
+            <div className={style.hashNutHeader}>
+                <div className={style.hashNutTitle}>{textMap['Checkout']}</div>
+                <div className={style.hashNutClose} onClick={() => { setHideMask(true) }}>
                     {closeIcon}
                 </div>
             </div>
-            <div className="hashNutLine">
-                <div className="hashNutLineTitle">Select chain</div>
-                <div className="hashNutSelectBox">
+            <div className={style.hashNutLine}>
+                <div className={style.hashNutLineTitle}>{textMap['Select chain']}</div>
+                <div className={style.hashNutSelectBox}>
                     {renderArr.map((item: any, index: number) => {
                         return (
-                            <div onClick={() => { bandleChangeChain(index) }} className={`hashNutSelectItem ${active === index ? 'hashNutSelectItemActive' : ''}`} key={index}>{item.name}</div>
+                            <div onClick={() => { bandleChangeChain(index) }} className={`${style.hashNutSelectItem} ${active === index ? style.hashNutSelectItemActive : ''}`} key={index}>{item.name}</div>
                         )
                     })}
                 </div>
             </div>
-            <div className="hashNutLine">
-                <div className="hashNutLineTitle">Select coin</div>
-                <div className="hashNutSelectBox">
+            <div className={style.hashNutLine}>
+                <div className={style.hashNutLineTitle}>{textMap['Select coin']}</div>
+                <div className={style.hashNutSelectBox}>
                     {renderArr[active] && renderArr[active].coins.map((item: any, index: number) => {
                         return (
                             <div onClick={() => {
                                 bandleChangeCoin(index)
-                            }} key={index} className={!item.icon && !item.name ? 'hashNutSelectItemNull' : `hashNutSelectItem ${activeCoin === index ? 'hashNutSelectItemActive' : ''}`}>
+                            }} key={index} className={!item.icon && !item.name ? style.hashNutSelectItemNull : `${style.hashNutSelectItem} ${activeCoin === index ? style.hashNutSelectItemActive : ''}`}>
                                 {item.icon}
                                 {item.name}
                             </div>
@@ -101,31 +105,31 @@ function Pay({ configure, emit }: any) {
                     })}
                 </div>
             </div>
-            <div className="hashNutLine">
-                <div className="hashNutLineTitle">Amount</div>
-                <div className="hashNutAmountBox">
-                    <div className="hashNutAmountBoxItem">
+            <div className={style.hashNutLine}>
+                <div className={style.hashNutLineTitle}>{textMap['Amount']}</div>
+                <div className={style.hashNutAmountBox}>
+                    <div className={style.hashNutAmountBoxItem}>
                         <span>{amount && formatNumber(amount)}</span>
                         {currency}
                     </div>
-                    <div className="hashNutAmountBoxFlag">
+                    <div className={style.hashNutAmountBoxFlag}>
                         {doubleArrowRight}
                     </div>
-                    <div className="hashNutAmountBoxItem hashNutAmountBoxItemPointer" style={amountRate === 0 ? { display: 'none' } : { display: 'block' }}>
+                    <div className={`${style.hashNutAmountBoxItem} ${style.hashNutAmountBoxItemPointer}`} style={amountRate === 0 ? { display: 'none' } : { display: 'block' }}>
                         <span>{amountRate}</span>
                         {renderCoinName()}
                     </div>
-                    <div className={`${amountRate === 0 ? 'hashNutAmountBoxItemLoadShow' : 'hashNutAmountBoxItemLoadHide'} `}>
+                    <div className={`${amountRate === 0 ? style.hashNutAmountBoxItemLoadShow : style.hashNutAmountBoxItemLoadHide} `}>
                         <span></span><span></span><span></span><span></span><span></span>
                     </div>
                 </div>
             </div>
-            <div className="hashNutCurrencyDesc">Reference Rates 1 {renderCoinName()} ≈ {rate} {currency}</div>
-            <div className="hashNutOrderBtn" onClick={() => { bandleConfirm() }}>Confirm</div>
-            <div className="hashNutOrderBtnHide">
+            <div className={style.hashNutCurrencyDesc}>{textMap['Reference Rates']} 1 {renderCoinName()} ≈ {rate} {currency}</div>
+            <div className={style.hashNutOrderBtn} onClick={() => { bandleConfirm() }}>{textMap['Confirm']}</div>
+            <div className={style.hashNutOrderBtnHide}>
                 <span></span><span></span><span></span><span></span><span></span>
             </div>
-            <div className="hashNutOrderError"></div>
+            <div className={style.hashNutOrderError}></div>
         </div>
     )
 }

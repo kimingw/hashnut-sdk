@@ -2,14 +2,17 @@ import { checkPhone, ethConfig, randomString } from '../../utils'
 import { LOGINAPP, LOGINDAPP } from '../../static/constant'
 import { rightIcon, phoneIcon, pcIcon, closeIcon } from '../../static/svg'
 import QRCode from 'qrcode'
-import { ethers } from "ethers";
+import 'tronweb'
+import { ethers } from "ethers"
+import allTextMap from '../../static/lang'
+import style from './index.module.css'
 
-
-function Login({ configure, emit }: any) {
-    const { loginInfo } = configure
+function Login({ configure, emit }: LoginParams) {
+    const { lang, loginInfo } = configure
     const { loginRes, callback } = loginInfo
     const { eth, bsc, tron, url, } = loginRes
     const { setHideMask } = emit
+    const textMap = allTextMap[lang]
 
     // phone,pc
     const [showState, setShowState] = useState('phone')
@@ -219,18 +222,18 @@ function Login({ configure, emit }: any) {
                 <>
                     {/* 列表 */}
                     {checkPhone() && !window.tronLink && !window.ethereum ?
-                        <div className="hashNutAppList">
+                        <div className={style.hashNutAppList}>
                             {LOGINAPP(url || window.location.href).map((item, index) => {
                                 return (
                                     <React.Fragment key={index}>
-                                        <a className="hashNutAccountItem" href={item.src}>
-                                            <div className="hashNutAccountItemTitle">{item.name}</div>
-                                            <img src={item.icon} className="hashNutAppRightIcon" />
-                                            <div className="hashNutAppRightIconPoint">
+                                        <a className={style.hashNutAccountItem} href={item.src}>
+                                            <div className={style.hashNutAccountItemTitle}>{item.name}</div>
+                                            <img src={item.icon} className={style.hashNutAppRightIcon} />
+                                            <div className={style.hashNutAppRightIconPoint}>
                                                 {rightIcon}
                                             </div>
                                         </a>
-                                        {LOGINAPP(url || window.location.href).length >= index && <div className="hashNutAccountItemLine"></div>}
+                                        {LOGINAPP(url || window.location.href).length >= index && <div className={style.hashNutAccountItemLine}></div>}
                                     </React.Fragment>
                                 )
                             })}
@@ -240,16 +243,16 @@ function Login({ configure, emit }: any) {
                                 if (!(checkPhone() && item.appNeed)) {
                                     return (
                                         <React.Fragment key={index}>
-                                            <div onClick={() => { bandleLogin(item.type, item.chain, item.chainId) }} className="hashNutAccountItem">
-                                                <div className="hashNutAccountItemIcon">
+                                            <div onClick={() => { bandleLogin(item.type, item.chain, item.chainId) }} className={style.hashNutAccountItem}>
+                                                <div className={style.hashNutAccountItemIcon}>
                                                     {item.coinIcon}
                                                 </div>
-                                                <div className="hashNutAccountItemTitle">{item.type === 'metamask' && !checkPhone() && !window.ethereum ? 'Install MetaMask' :
-                                                    item.type === 'tronlink' && !checkPhone() && !window.tronLink ? 'Install MetaMask' :
+                                                <div className={style.hashNutAccountItemTitle}>{item.type === 'metamask' && !checkPhone() && !window.ethereum ? 'Install MetaMask' :
+                                                    item.type === 'tronlink' && !checkPhone() && !window.tronLink ? 'Install TronLink' :
                                                         item.name}
                                                 </div>
                                             </div>
-                                            {LOGINDAPP({ eth, bsc, tron }).length - 1 > index && <div className="hashNutAccountItemLine"></div>}
+                                            {LOGINDAPP({ eth, bsc, tron }).length - 1 > index && <div className={style.hashNutAccountItemLine}></div>}
                                         </React.Fragment>
                                     )
                                 }
@@ -262,13 +265,13 @@ function Login({ configure, emit }: any) {
                 <>
                     {/* 二维码 */}
                     <div>
-                        <div className="hashNutQrBoxTitle">Scan QR code with imToken, MetaMask, TronkLink Pro,TokenPocket App</div>
-                        <div className="hashNutQrBoxImage">
-                            <div ref={(qrImageCanvas) => { renderCanvas(qrImageCanvas) }} className="hashNutQrBoxImageCanvas" title="https://kimingw.github.io/pay-demo/dist/index.html">
+                        <div className={style.hashNutQrBoxTitle}>{textMap['Scan QR code with imToken, MetaMask, TronkLink Pro,TokenPocket App']}</div>
+                        <div className={style.hashNutQrBoxImage}>
+                            <div ref={(qrImageCanvas) => { renderCanvas(qrImageCanvas) }} className={style.hashNutQrBoxImageCanvas} title="https://kimingw.github.io/pay-demo/dist/index.html">
                                 {/* canvas */}
                             </div>
                         </div>
-                        <div className="hashNutQrBoxDesc">If the wallet APP does not support scanning QR code, you can try to copy the URL to the APP to open it.</div>
+                        <div className={style.hashNutQrBoxDesc}>{textMap['If the wallet APP does not support scanning QR code, you can try to copy the URL to the APP to open it.']}</div>
                     </div>
                 </>
             )
@@ -276,37 +279,37 @@ function Login({ configure, emit }: any) {
     }
 
     return (
-        <div className="hashNutContent">
-            <div className="hashNutHeader">
-                <div className="hashNutTitle">Login</div>
-                <div className="hashNutClose" onClick={() => { setHideMask(true) }}>
+        <div className={style.hashNutContent}>
+            <div className={style.hashNutHeader}>
+                <div className={style.hashNutTitle}>{textMap['Login']}</div>
+                <div className={style.hashNutClose} onClick={() => { setHideMask(true) }}>
                     {closeIcon}
                 </div>
             </div>
             {/* 加载中 */}
             {loading ?
-                <div className="hashNutAmountBoxItemLoadShow">
+                <div className={style.hashNutAmountBoxItemLoadShow}>
                     <span></span><span></span><span></span><span></span><span></span>
                 </div> :
                 <>
                     {renderContent()}
                     {/* 切换 */}
-                    <div className="hashNutUsePhoneBtnBox">
-                        <div className="hashNutUsePhoneBtn" onClick={() => { setShowState(showState === 'phone' ? 'pc' : 'phone') }}>
+                    <div className={style.hashNutUsePhoneBtnBox}>
+                        <div className={style.hashNutUsePhoneBtn} onClick={() => { setShowState(showState === 'phone' ? 'pc' : 'phone') }}>
                             {
                                 showState === 'phone' ?
                                     <>
-                                        <div className="hashNutUsePhoneBtnIcon">
+                                        <div className={style.hashNutUsePhoneBtnIcon}>
                                             {phoneIcon}
                                         </div>
-                                        <div className="hashNutUsePhoneBtnName">In mobile use</div>
+                                        <div className={style.hashNutUsePhoneBtnName}>{textMap['In mobile use']}</div>
                                     </>
                                     :
                                     <>
-                                        <div className="hashNutUsePhoneBtnIcon">
+                                        <div className={style.hashNutUsePhoneBtnIcon}>
                                             {pcIcon}
                                         </div>
-                                        <div className="hashNutUsePhoneBtnName">In PC use</div>
+                                        <div className={style.hashNutUsePhoneBtnName}>{textMap['In PC use']}</div>
                                     </>
                             }
                         </div>

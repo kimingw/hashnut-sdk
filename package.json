@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite --mode hashnut",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build --mode hashnut",
+    "build-lib": "tsc && vite build --config vite.build.js --mode hashnut",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -17,6 +18,7 @@
     "tronweb": "^4.4.0"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^23.0.0",
     "@rollup/plugin-inject": "^5.0.0",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
