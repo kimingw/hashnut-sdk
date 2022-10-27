@@ -36,7 +36,7 @@ const Mask = (prop: prop) => {
         }
     }
     return (
-        <div className={dom ? 'block' : 'none'}>
+        <div className={dom ? style.block : style.none}>
             <div className={`${style.maskBg} ${show ? style.show : style.hide}`} onClick={() => { setShow(false) }} onAnimationEnd={(e) => { closeAnima(e) }}></div>
             <div className={`${style.mask} ${show ? style.big : style.small}`}>
                 {_renderChildren()}
