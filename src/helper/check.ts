@@ -50,14 +50,14 @@ const check: any = {
             throw 'Please pass in parameters.(Example createOrder("ERC20","usdt",1))'
         }
         required(chainCode, 'string', 'chainCode')
-        checkArr(chainCode, ['ERC20', 'BEP20', 'TRC20'], 'chainCode')
+        checkArr(chainCode, ['ERC20', 'BEP20', 'TRC20','polygon-erc20'], 'chainCode')
         required(coinCode, 'string', 'coinCode')
         checkArr(coinCode, ['usdt', 'busd'], 'coinCode')
         required(amount, 'number', 'amount')
     },
     getCurrencyRate: (chainCode: ChainCode, coin: CoinCode, currency: Currency) => {
         required(chainCode, 'string', 'chainCode')
-        checkArr(chainCode, ['erc20', 'bep20', 'trc20'], 'chainCode')
+        checkArr(chainCode, ['ERC20', 'BEP20', 'TRC20'], 'chainCode')
         required(coin, 'string', 'coin')
         checkArr(coin, ['usdt', 'busd'], 'coin')
         required(currency, 'string', 'currency')

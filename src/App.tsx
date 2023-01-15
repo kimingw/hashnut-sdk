@@ -10,7 +10,7 @@ import { useCoins } from './helper/hook'
 const hashnutId = document.getElementById(projectName)
 
 
-function App({ lang: _lang, erc20Address, bep20Address, trc20Address }: InitProps) {
+function App({ lang: _lang, erc20Address, bep20Address, trc20Address, polygonErc20Address }: InitProps) {
   // 弹窗相关
   const [mask, setMask] = useState(null)
   const [hideMask, setHideMask] = useState(false)
@@ -25,6 +25,7 @@ function App({ lang: _lang, erc20Address, bep20Address, trc20Address }: InitProp
     erc20Address,
     bep20Address,
     trc20Address,
+    polygonErc20Address,
   })
   const coins = useCoins(address)
 
@@ -36,9 +37,9 @@ function App({ lang: _lang, erc20Address, bep20Address, trc20Address }: InitProp
   window[projectName] = {
     init: (configuration: InitProps) => {
       check.init(configuration)
-      const { lang, erc20Address, bep20Address, trc20Address } = configuration
+      const { lang, erc20Address, bep20Address, trc20Address, polygonErc20Address } = configuration
       lang && setLang(lang)
-      setAddress({ erc20Address, bep20Address, trc20Address })
+      setAddress({ erc20Address, bep20Address, trc20Address, polygonErc20Address })
     },
     changeLang: (lang: Lang) => {
       check.changeLang(lang)
@@ -61,12 +62,17 @@ function App({ lang: _lang, erc20Address, bep20Address, trc20Address }: InitProp
         intAmount = intAmount + '' + 0
       }
       const data = {
+        subject: 'web create order',
+        remark: 'web create order',
         mchOrderNo: getUUID(window.location.hostname + new Date().getTime()),
         chainCode,
         coinCode,
         amount: intAmount,
         receiptContractAddress: getAddress(chainCode, address),
-        accessChannel: 0
+        accessChannel: 0,
+        serviceId: 0,
+        serviceVersion: 'PaymentSplitterV2_1',
+        serviceType: 0
       }
       orderXhr.current = createXHR('/pay/createPayOrderByCashier', 'POST', data, (res: any) => {
         res.data.amount = intAmount

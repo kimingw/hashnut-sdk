@@ -1,12 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" sizes="any" href="<%= svgIcon %>">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= name %> SDK</title>
-  </head>
-  <body>
-    <script type="module" src="./src/main.tsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" sizes="any" href="<%= svgIcon %>">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    <%= name %> SDK
+  </title>
+  <style>
+    .pay {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      margin-top: 20px;
+      height: 30px;
+      background-color: aquamarine;
+      border: none;
+      border-radius: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- demo -->
+  <div class="button" style="width:300px;margin:20px;" id="login">Login</div>
+  <div class="pay" id="pay">
+    <img role="presentation" alt="" loading="lazy" class="Imagestyles__CloudinaryImage-sc-1oi2gnz-1 cUaoYo"
+      src="https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_2.0/c_scale,w_300/ncom/en_US/products/accessories/nintendo-switch/other-accessories/lvl40-wired-stereo-gaming-headset-blue-red/115764-pdp-switch-headset-neonpop-1200x675">
+    <button class="button">Pay</button>
+  </div>
+
+  <script type="module" src="./src/main.tsx"></script>
+  <script>
+    //     subject: 
+    // web create order
+    // remark: 
+    // web create order
+    // accessChannel: 
+    // 0
+    // mchOrderNo: 
+    // 1672031285
+    // chainCode: 
+    // polygon-erc20
+    // coinCode: 
+    // usdt
+    // receiptContractAddress: 
+    // 0xbb24b251b2bb2e95ca591c774ec42e757d27b451
+    // serviceId: 
+    // 0
+    // serviceVersion: 
+    // PaymentSplitterV2_1
+    // serviceType: 
+    // 0
+    // amount: 
+    // 1000000
+    setTimeout(() => {
+      window.HashNut.init({
+        erc20Address: '0xbb24b251b2bb2e95ca591c774ec42e757D27b451',
+        polygonErc20Address: '0xbb24b251b2bb2e95ca591c774ec42e757D27b451',
+        bep20Address: '0xf38Bf88F2F36866787E0c8b0325Eed9e7d0aa367',
+        trc20Address: '0xf38Bf88F2F36866787E0c8b0325Eed9e7d0aa367',
+      })
+    }, 200)
+
+    const login = document.getElementById('login')
+    login.addEventListener('click', () => {
+      window.HashNut.login({ eth: 5, bsc: 97, tron: "shasta" })
+    })
+
+    const pay = document.getElementById('pay')
+    pay.addEventListener('click', () => {
+      window.HashNut.pay(
+        5, 'USD'
+      )
+    })
+
+
+  </script>
+</body>
+
 </html>

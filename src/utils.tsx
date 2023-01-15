@@ -30,12 +30,14 @@ const getUUID = (domain: string) => {
 
 const getAddress = (chainCode: string, addres: any) => {
     switch (chainCode) {
-        case 'erc20':
+        case 'ERC20':
             return addres.erc20Address
-        case 'bep20':
+        case 'BEP20':
             return addres.bep20Address
-        case 'trc20':
+        case 'TRC20':
             return addres.trc20Address
+        case 'polygon-erc20':
+            return addres.polygonErc20Address
     }
 }
 

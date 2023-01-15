@@ -2,13 +2,13 @@
     margin-top: 20px
 }
 
-.hashNutLineTitle {}
-
 .hashNutSelectBox {
     margin-top: 15px;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .hashNutSelectItem {
@@ -24,6 +24,19 @@
     box-sizing: border-box;
     cursor: pointer;
     user-select: none
+}
+
+.hashNutSelectItemWidth {
+    width: 48%;
+    flex: none;
+}
+
+.hashNutSelectItemWidth:nth-child(2n) {
+    margin-right: 0;
+}
+
+.hashNutSelectItemWidth:nth-child(n+3) {
+    margin-top: 10px;
 }
 
 .hashNutSelectItem svg {

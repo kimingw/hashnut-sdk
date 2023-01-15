@@ -11,12 +11,14 @@ interface InitProps {
   erc20Address?: string
   bep20Address?: string
   trc20Address?: string
+  polygonErc20Address?: string
 }
 
 interface AddressProps {
   erc20Address: string
   bep20Address: string
   trc20Address: string
+  polygonErc20Address: string
 }
 
 interface Coin {

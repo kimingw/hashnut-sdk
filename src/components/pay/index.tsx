@@ -25,6 +25,7 @@ function Pay({ configure, emit }: PayParams) {
                 arr.push(PAYUI[key])
             }
         }
+        console.log(renderArr)
         setRenderArr(arr)
     }, [])
 
@@ -36,8 +37,8 @@ function Pay({ configure, emit }: PayParams) {
 
 
     const fetchRate = async () => {
-        const chainCode = renderArr[active].name.toLocaleLowerCase()
-        const coin = renderArr[active].coins[activeCoin].name
+        const chainCode = renderArr[active]?.name
+        const coin = renderArr[active]?.coins[activeCoin].name
         window[projectName].getCurrencyRate(chainCode, coin, currency, (res: any) => {
             setRate(res.data.rate)
             setAmountRate(formatNumber((amount / res.data.rate).toFixed(2)))
@@ -62,7 +63,7 @@ function Pay({ configure, emit }: PayParams) {
     }
 
     const bandleConfirm = () => {
-        const chainCode = renderArr[active].name.toLocaleLowerCase()
+        const chainCode = renderArr[active].name
         const coin = renderArr[active].coins[activeCoin].name
         window[projectName].createOrder(chainCode, coin, amount, (res: any) => {
             if (res.count === 0) {
@@ -85,7 +86,7 @@ function Pay({ configure, emit }: PayParams) {
                 <div className={style.hashNutSelectBox}>
                     {renderArr.map((item: any, index: number) => {
                         return (
-                            <div onClick={() => { bandleChangeChain(index) }} className={`${style.hashNutSelectItem} ${active === index ? style.hashNutSelectItemActive : ''}`} key={index}>{item.name}</div>
+                            <div onClick={() => { bandleChangeChain(index) }} className={`${renderArr.length > 3 ? style.hashNutSelectItemWidth : ''} ${style.hashNutSelectItem} ${active === index ? style.hashNutSelectItemActive : ''}`} key={index}>{item.name}</div>
                         )
                     })}
                 </div>

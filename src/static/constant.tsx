@@ -65,6 +65,19 @@ const PAYUI: any = {
             }, {}
         ]
     },
+    polygonErc20Address: {
+        name: 'polygon-erc20',
+        coins: [
+            {
+                name: 'usdt',
+                icon: ethUsdt
+            },
+            {
+                name: 'usdc',
+                icon: ethUsdc
+            },
+        ]
+    }
 }
 
 export { PAYUI, LOGINAPP, LOGINDAPP }
